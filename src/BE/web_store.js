@@ -136,4 +136,4 @@ async function classifiedQuestions(input) {
 }
 
 
-classifiedQuestions('can you give me the top 2 fruit in your store and reason why?');
+classifiedQuestions('can you give me the top 5 fruit in your store?');
