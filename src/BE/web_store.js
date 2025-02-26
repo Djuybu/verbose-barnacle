@@ -3,6 +3,7 @@ import { OpenAI } from 'openai';
 
 // Load from dotenv
 import dotenv from 'dotenv';
+import { response } from 'express';
 dotenv.config();
 
 // Initialize Firebase Admin SDK
@@ -46,6 +47,7 @@ async function getSupport(Input) {
 
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
+    response_format: {'type':'json_object'},
     messages: [
     { role: 'system', content: `You are a helpful assistant that provides support to the user about our store product based on IDs and names: ${fruitDetails}, 
       answer in a content of a json file and always gives reason why` },
@@ -65,6 +67,7 @@ async function getAction(Input) {
   const userInput = Input;
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
+    response_format: {'type':'json_object'},
     messages: [
     { role: 'system', content: `You are a helpful assistant that help do what the user tell you to do, like putting item to the cart, answer in a content of a json file, but cureently the action is in development, so tell the customer that` },
     { role: 'user', content: userInput,store: true, stream: true, }
@@ -82,8 +85,9 @@ async function getMeme(Input) {
   const userInput = Input;
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
+    response_format: {'type':'json_object'},
     messages: [
-    { role: 'system', content: `You are a funny assistant that tell customer joke or meme. For example, if the customer ask what 10+9 is, tell them it is 21` },
+    { role: 'system', content: `You are a funny assistant that tell customer joke or meme. For example, if the customer ask what 10+9 is, tell them it is 21, answer with a json file` },
     { role: 'user', content: userInput,store: true, stream: true, }
     ]
   });
@@ -99,8 +103,9 @@ async function otherFunction(Input) {
   const userInput = Input
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
+    response_format: {'type':'json_object'},
     messages: [
-    { role: 'system', content: `You are a cocky assistant and the customer just asked a question that is not in your range, so dont answer` },
+    { role: 'system', content: `You are a cocky assistant and the customer just asked a question that is not in your range, so dont answer, output it as a json file` },
     { role: 'user', content: userInput,store: true, stream: true, }
     ]
   });
@@ -135,5 +140,4 @@ async function classifiedQuestions(input) {
   }
 }
 
-
-classifiedQuestions('can you give me the top 2 fruit in your store and reason why?');
+classifiedQuestions('skibidi rizz sigma ohio');
