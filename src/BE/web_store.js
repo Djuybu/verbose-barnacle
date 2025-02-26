@@ -1,5 +1,6 @@
 import admin from 'firebase-admin';
 import { OpenAI } from 'openai';
+import readline from 'readline';
 
 // Load from dotenv
 import dotenv from 'dotenv';
@@ -20,6 +21,9 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
+// Store chat history
+const chatHistory = [];  
+
 // FUNCTIONS:
 // First, the user's question will be passed to classification(barbaric type, i know)
 // Then, it will be passed to corresponding function to execute; include: support
@@ -27,88 +31,91 @@ const openai = new OpenAI({
 // prompt engineering(not quite, i know))), and other(which will declined to be answered)
 
 
+
+
 //SUPPORT FUNCTION
 // Fetch fruit IDs and names from Firebase
 async function getFruitsFromFirebase() {
   const snapshot = await db.collection('fruit').get();
-  const fruits = snapshot.docs.map(doc => ({
+  return snapshot.docs.map(doc => ({
       fruit_id: doc.id,  // Document ID is the fruit_id
       name: doc.data().name // Assume each document has a 'name' field
   }));
-  return fruits;
 }
 
 // Get recommendations from OpenAI
-async function getSupport(Input) {
+async function getSupport(userInput) {
   // Prepare the data for the prompt (fruit_id and name)
   const fruits = await getFruitsFromFirebase();
-  const userInput = Input;
   const fruitDetails = fruits.map(fruit => `${fruit.fruit_id} (${fruit.name})`).join(', ');
 
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
-    response_format: {'type':'json_object'},
+    response_format: { type: "json_object" },
     messages: [
     { role: 'system', content: `You are a helpful assistant that provides support to the user about our store product based on IDs and names: ${fruitDetails}, 
-      answer in a content of a json file and always gives reason why` },
-    { role: 'user', content: userInput,store: true, stream: true, }
+      answer in json and always gives reason why` },
+    { role: 'user', content: userInput}
     ]
   });
 
-  const recommendations = response.choices.map(choice => choice.message.content).join("\n");
-  console.log(recommendations);
+  // Save chat log
+  chatHistory.push({ role: 'assistant', content: response });
+
+  console.log(response.choices[0].message.content);
 }
 
 
 //ACTION FUNCTION
 // Get action from OpenAI
-async function getAction(Input) {
-  // Prepare the data for the prompt (fruit_id and name)
-  const userInput = Input;
+async function getAction(userInput) {
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
-    response_format: {'type':'json_object'},
+    response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a helpful assistant that help do what the user tell you to do, like putting item to the cart, answer in a content of a json file, but cureently the action is in development, so tell the customer that` },
-    { role: 'user', content: userInput,store: true, stream: true, }
+    { role: 'system', content: `You are a helpful assistant that help do what the user tell you to do, like putting item to the cart, answer in json, but cureently the action is in development, so tell the customer that` },
+    { role: 'user', content: userInput}
     ]
   });
 
-  const recommendations = response.choices.map(choice => choice.message.content).join("\n");
-  console.log(recommendations);
+  // Save chat log
+  chatHistory.push({ role: 'assistant', content: response });
+
+  console.log(response.choices[0].message.content);
 }
 
 
 //MEME FUNCTION
-async function getMeme(Input) {
-  // Prepare the data for the prompt (fruit_id and name)
-  const userInput = Input;
+async function getMeme(userInput) {
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
-    response_format: {'type':'json_object'},
+    response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a funny assistant that tell customer joke or meme. For example, if the customer ask what 10+9 is, tell them it is 21, answer with a json file` },
-    { role: 'user', content: userInput,store: true, stream: true, }
+    { role: 'system', content: `You are a funny assistant that tell customer joke or meme. For example, if the customer ask what 10+9 is, tell them it is 21, answer in json` },
+    { role: 'user', content: userInput}
     ]
   });
 
-  const recommendations = response.choices.map(choice => choice.message.content).join("\n");
-  console.log(recommendations);
+  // Save chat log
+  chatHistory.push({ role: 'assistant', content: response });
+
+  console.log(response.choices[0].message.content);
 }
 
 
 //OTHER FUNCTION
-async function otherFunction(Input) {
-  // Prepare the data for the prompt (fruit_id and name)
-  const userInput = Input
+async function otherFunction(userInput) {
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
-    response_format: {'type':'json_object'},
+    response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a cocky assistant and the customer just asked a question that is not in your range, so dont answer, output it as a json file` },
-    { role: 'user', content: userInput,store: true, stream: true, }
+    { role: 'system', content: `You are a serious assistant and the customer just asked a question that is not in your range, so dont answer, answer in json` },
+    { role: 'user', content: userInput}
     ]
   });
+
+  // Save chat log
+  chatHistory.push({ role: 'assistant', content: response });
 
   const recommendations = response.choices.map(choice => choice.message.content).join("\n");
   console.log(recommendations);
@@ -116,28 +123,55 @@ async function otherFunction(Input) {
 
 
 //HANDLE QUESTION
-async function classifiedQuestions(input) {
-  const userInput = input
+async function classifiedQuestions(userInput) {
+  // Exit case
+  if (userInput.toLowerCase() === "exit") {
+    console.log("Goodbye!");
+    rl.close();
+    return;
+  }
+
+  
   const response = await openai.chat.completions.create({
     model: 'gpt-4o-mini',
     messages: [
     { role: 'system', content: `You are a bot assistant used to classified question from user, return question with only 1 of the following word: support/action/meme/other. for example 
       if the user ask about infomation on certain item or need recommendation on item, return support. if they need you to put item into cart, return action. if they want you to tell a 
       joke or ask you about something meme related, return meme, and the rest goes into other` },
-    { role: 'user', content: userInput,store: true, stream: true, }
+    { role: 'user', content: userInput}
     ]
   });
 
-  const recommendations = response.choices.map(choice => choice.message.content).join("\n");
-  if(recommendations=='support'){
-    getSupport(userInput);
-  }else if(recommendations=='action'){
-    getAction(userInput);
-  }else if(recommendations=='meme'){
-    getMeme(userInput);
-  }else{
-    otherFunction(userInput);
-  }
+  // Save chat log
+  chatHistory.push({ role: 'user', content: userInput });
+
+  const recommendations = response.choices[0].message.content.trim().toLowerCase();
+  
+  if(recommendations=='support') await getSupport(userInput);
+  else if(recommendations=='action') await getAction(userInput);
+  else if(recommendations=='meme') await getMeme(userInput);
+  else await otherFunction(userInput);
+  
+  promptUser(); // Ask for next input
 }
 
-classifiedQuestions('skibidi rizz sigma ohio');
+// Create a readline interface for user input
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+// Function to prompt the user continuously
+function promptUser() {
+  rl.question("You: ", classifiedQuestions);
+}
+
+// Start the chatbot
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+sleep(2000).then(() => console.log("Chatbot started! Type 'exit' to stop."));
+
+promptUser();
+
+// classifiedQuestions('skibidi rizz sigma ohio');
