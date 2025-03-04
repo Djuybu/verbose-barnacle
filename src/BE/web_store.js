@@ -30,7 +30,52 @@ const chatHistory = [];
 // (for recommendation, question, etc.), action (add item to cart), meme(10+9(to check
 // prompt engineering(not quite, i know))), and other(which will declined to be answered)
 
+// User and assistant prompt will also be shorten and put into an array, for cached memory.
+// Literally the most token-hungry $h1t i've ever seen and i don't want to touch 
+// LangChain. $h1t scarry.
 
+// Prompt-shortening and saving
+async function savePrompt(userInput) {
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+    { role: 'system', content: `You are a helpful assistant and your job is to shorten user prompt to store memory and reduced the number of used token. So take the input and shorten it as much as possible and out put it as string` },
+    { role: 'user', content: userInput.toString()}
+    ]
+  });
+
+  // Save chat log
+  if (response.choices && response.choices.length > 0 && response.choices[0].message) {
+    chatHistory.push({ role: 'user', content: response.choices[0].message.content });
+  } else {
+    console.error("Unexpected API response:", response);
+  }
+
+  return;
+}
+
+// Answer-shortening and saving
+async function saveAnswer(answer) {
+
+  const response = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+    { role: 'system', content: `You are a helpful assistant and your job is to shorten your answer to user question, to reduced the number of used token for cached input. So take the input and shorten it as much as possible and output it as string` },
+    { role: 'assistant', content: answer.toString()}
+    ]
+  });
+
+  // Save chat log
+  if (response.choices && response.choices.length > 0 && response.choices[0].message) {
+    chatHistory.push({ role: 'assistant', content: response.choices[0].message.content });
+  } else {
+    console.error("Unexpected API response:", response);
+  }
+
+
+  return;
+}
 
 
 //SUPPORT FUNCTION
@@ -53,16 +98,21 @@ async function getSupport(userInput) {
     model: 'gpt-4o-mini',
     response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a helpful assistant that provides support to the user about our store product based on IDs and names: ${fruitDetails}, 
-      answer in json and always gives reason why` },
+    { role: 'system', content: `You are a helpful assistant with memory ${chatHistory} that provides support to the user about our store 
+      product based on IDs and names: ${fruitDetails}, answer in json and always gives reason why` },
     { role: 'user', content: userInput}
     ]
   });
 
-  // Save chat log
-  chatHistory.push({ role: 'assistant', content: response });
-
-  console.log(response.choices[0].message.content);
+  // Save chat log and output
+  if (response.choices && response.choices.length > 0 && response.choices[0].message) {
+    savePrompt(userInput);
+    saveAnswer(response.choices[0].message.content); 
+    console.log(response.choices[0].message.content);
+  } else {
+    console.error("Unexpected API response:", response);
+  }
+  
 }
 
 
@@ -73,15 +123,21 @@ async function getAction(userInput) {
     model: 'gpt-4o-mini',
     response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a helpful assistant that help do what the user tell you to do, like putting item to the cart, answer in json, but cureently the action is in development, so tell the customer that` },
+    { role: 'system', content: `You are a helpful assistant with memory ${chatHistory} that help do what the user tell you to do, like 
+      putting item to the cart, answer in json, but cureently the action is in development, so tell the customer that` },
     { role: 'user', content: userInput}
     ]
   });
 
   // Save chat log
-  chatHistory.push({ role: 'assistant', content: response });
-
-  console.log(response.choices[0].message.content);
+  if (response.choices && response.choices.length > 0 && response.choices[0].message) {
+    savePrompt(userInput);
+    saveAnswer(response.choices[0].message.content);
+    console.log(response.choices[0].message.content);
+  } else {
+    console.error("Unexpected API response:", response);
+  }
+  
 }
 
 
@@ -91,13 +147,11 @@ async function getMeme(userInput) {
     model: 'gpt-4o-mini',
     response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a funny assistant that tell customer joke or meme. For example, if the customer ask what 10+9 is, tell them it is 21, answer in json` },
+    { role: 'system', content: `You are a funny assistant that tell customer joke or meme. For example, if the customer ask what 10+9 is, 
+      tell them it is 21, answer in json` },
     { role: 'user', content: userInput}
     ]
   });
-
-  // Save chat log
-  chatHistory.push({ role: 'assistant', content: response });
 
   console.log(response.choices[0].message.content);
 }
@@ -109,16 +163,13 @@ async function otherFunction(userInput) {
     model: 'gpt-4o-mini',
     response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a serious assistant and the customer just asked a question that is not in your range, so dont answer, answer in json` },
+    { role: 'system', content: `You are a serious assistant and the customer just asked a question that is not in your range, so dont answer, 
+      answer in json` },
     { role: 'user', content: userInput}
     ]
   });
 
-  // Save chat log
-  chatHistory.push({ role: 'assistant', content: response });
-
-  const recommendations = response.choices.map(choice => choice.message.content).join("\n");
-  console.log(recommendations);
+  console.log(response.choices[0].message.content);
 }
 
 
@@ -131,29 +182,38 @@ async function classifiedQuestions(userInput) {
     return;
   }
 
-  
-  const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
-    messages: [
-    { role: 'system', content: `You are a bot assistant used to classified question from user, return question with only 1 of the following word: support/action/meme/other. for example 
-      if the user ask about infomation on certain item or need recommendation on item, return support. if they need you to put item into cart, return action. if they want you to tell a 
-      joke or ask you about something meme related, return meme, and the rest goes into other` },
-    { role: 'user', content: userInput}
-    ]
-  });
+  try {
+    // Question classification
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: `You are a bot assistant used to classify questions from the user. Return only ONE of the following words: 
+          support/action/meme/other. For example:
+          - If the user asks about information or recommendations, return "support".
+          - If they need you to put an item in the cart, return "action".
+          - If they want a joke/meme, return "meme".
+          - Otherwise, return "other".` 
+        },
+        { role: 'user', content: userInput }
+      ]
+    });
 
-  // Save chat log
-  chatHistory.push({ role: 'user', content: userInput });
+    const category = response.choices[0].message.content.trim().toLowerCase();
+    
+    // Route the input to the correct function
+    if (category === 'support') await getSupport(userInput);
+    else if (category === 'action') await getAction(userInput);
+    else if (category === 'meme') await getMeme(userInput);
+    else await otherFunction(userInput);
+    
+  } catch (error) {
+    console.error("Error processing request:", error);
+  }
 
-  const recommendations = response.choices[0].message.content.trim().toLowerCase();
-  
-  if(recommendations=='support') await getSupport(userInput);
-  else if(recommendations=='action') await getAction(userInput);
-  else if(recommendations=='meme') await getMeme(userInput);
-  else await otherFunction(userInput);
-  
-  promptUser(); // Ask for next input
+  // Ask for the next input
+  promptUser();
 }
+
 
 // Create a readline interface for user input
 const rl = readline.createInterface({
@@ -167,11 +227,10 @@ function promptUser() {
 }
 
 // Start the chatbot
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-sleep(2000).then(() => console.log("Chatbot started! Type 'exit' to stop."));
+console.log("Chatbot started! Type 'exit' to stop.");
 
 promptUser();
 
 // classifiedQuestions('skibidi rizz sigma ohio');
+
+// create a function to trim and shorten both ai output and user input to lower memory
