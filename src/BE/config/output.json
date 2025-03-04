@@ -1,0 +1,301 @@
+{
+  "fruits": [
+    {
+      "image": "//product.hstatic.net/200000528965/product/man-ruby-uc-khay-05-qua_0e64b299c5ea4d4bae8155051c33cca0_small.jpg",
+      "name": "Mận Ruby Úc",
+      "isInStock": true,
+      "tags": ["Australia", "Plum", "Brand Ruby"],
+      "price": "279,000₫",
+      "volume": "Khay 05 quả",
+      "description": "Mận Ruby Úc là một loại quả ngọt, mọng nước với màu đỏ đẹp mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/man-ruby-uc-khay-05-qua_0e64b299c5ea4d4bae8155051c33cca0_small.jpg",
+      "name": "Mận Ruby Úc",
+      "isInStock": true,
+      "tags": ["Australia", "Plum", "Brand Ruby"],
+      "price": "447,000₫",
+      "volume": "Khay 08 quả",
+      "description": "Mận Ruby Úc là một loại quả ngọt, mọng nước với màu đỏ đẹp mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/man-ruby-uc-khay-05-qua_0e64b299c5ea4d4bae8155051c33cca0_small.jpg",
+      "name": "Mận Ruby Úc",
+      "isInStock": true,
+      "tags": ["Australia", "Plum", "Brand Ruby"],
+      "price": "950,000₫",
+      "volume": "Khay 17 quả",
+      "description": "Mận Ruby Úc là một loại quả ngọt, mọng nước với màu đỏ đẹp mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/man-ruby-uc-khay-05-qua_0e64b299c5ea4d4bae8155051c33cca0_small.jpg",
+      "name": "Mận Ruby Úc",
+      "isInStock": true,
+      "tags": ["Australia", "Plum", "Brand Ruby"],
+      "price": "1,117,000₫",
+      "volume": "Khay quà 20 quả",
+      "description": "Mận Ruby Úc là một loại quả ngọt, mọng nước với màu đỏ đẹp mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/man-ruby-uc-khay-05-qua_0e64b299c5ea4d4bae8155051c33cca0_small.jpg",
+      "name": "Mận Ruby Úc",
+      "isInStock": true,
+      "tags": ["Australia", "Plum", "Brand Ruby"],
+      "price": "1,995,000₫",
+      "volume": "Thùng nguyên đai 05kg",
+      "description": "Mận Ruby Úc là một loại quả ngọt, mọng nước với màu đỏ đẹp mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/man-duong-uc-khay-01-kg_071733a9472a4f1ba7d67af94eff357e_small.jpg",
+      "name": "Mận Đường Úc",
+      "isInStock": true,
+      "tags": ["Australia", "Plum", "Brand Sugar"],
+      "price": "399,000₫",
+      "volume": "01kg",
+      "description": "Mận Đường Úc có vị ngọt thanh, rất thích hợp cho mùa hè."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/man-duong-uc-khay-01-kg_071733a9472a4f1ba7d67af94eff357e_small.jpg",
+      "name": "Mận Đường Úc",
+      "isInStock": true,
+      "tags": ["Australia", "Plum", "Brand Sugar"],
+      "price": "798,000₫",
+      "volume": "02kg",
+      "description": "Mận Đường Úc có vị ngọt thanh, rất thích hợp cho mùa hè."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/man-duong-uc-khay-01-kg_071733a9472a4f1ba7d67af94eff357e_small.jpg",
+      "name": "Mận Đường Úc",
+      "isInStock": true,
+      "tags": ["Australia", "Plum", "Brand Sugar"],
+      "price": "3,990,000₫",
+      "volume": "Thùng nguyên đai 10kg",
+      "description": "Mận Đường Úc có vị ngọt thanh, rất thích hợp cho mùa hè."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-super-big-new-zealand-khay-0.6-kg-900-900_25df40eb637748998c5bc7aef9d8772b_small.jpg",
+      "name": "Cherry Super Big New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Super Big"],
+      "price": "599,000₫",
+      "volume": "Mini ~ 0.6kg",
+      "description": "Cherry Super Big New Zealand có vị ngọt đậm, kích thước lớn hấp dẫn."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-super-big-new-zealand-khay-0.6-kg-900-900_25df40eb637748998c5bc7aef9d8772b_small.jpg",
+      "name": "Cherry Super Big New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Super Big"],
+      "price": "999,000₫",
+      "volume": "Nhỏ ~ 01kg",
+      "description": "Cherry Super Big New Zealand có vị ngọt đậm, kích thước lớn hấp dẫn."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-super-big-new-zealand-khay-0.6-kg-900-900_25df40eb637748998c5bc7aef9d8772b_small.jpg",
+      "name": "Cherry Super Big New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Super Big"],
+      "price": "1,998,000₫",
+      "volume": "Trung ~ 02kg",
+      "description": "Cherry Super Big New Zealand có vị ngọt đậm, kích thước lớn hấp dẫn."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-super-big-new-zealand-khay-0.6-kg-900-900_25df40eb637748998c5bc7aef9d8772b_small.jpg",
+      "name": "Cherry Super Big New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Super Big"],
+      "price": "2,997,000₫",
+      "volume": "Lớn ~ 03kg",
+      "description": "Cherry Super Big New Zealand có vị ngọt đậm, kích thước lớn hấp dẫn."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-super-big-new-zealand-khay-0.6-kg-900-900_25df40eb637748998c5bc7aef9d8772b_small.jpg",
+      "name": "Cherry Super Big New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Super Big"],
+      "price": "3,087,000₫",
+      "volume": "Hộp kính trắng ~ 03kg",
+      "description": "Cherry Super Big New Zealand có vị ngọt đậm, kích thước lớn hấp dẫn."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-super-big-new-zealand-khay-0.6-kg-900-900_25df40eb637748998c5bc7aef9d8772b_small.jpg",
+      "name": "Cherry Super Big New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Super Big"],
+      "price": "4,995,000₫",
+      "volume": "Thùng nguyên đai ~ 05kg",
+      "description": "Cherry Super Big New Zealand có vị ngọt đậm, kích thước lớn hấp dẫn."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-jumbo-new-zealand-khay-0.6-kg-900-900_b2435e4415df406083884511b1991333_small.jpg",
+      "name": "Cherry Jumbo New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Jumbo"],
+      "price": "479,000₫",
+      "volume": "Mini ~ 0.6kg",
+      "description": "Cherry Jumbo New Zealand to lớn và ngọt ngào, rất ngon miệng."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-jumbo-new-zealand-khay-0.6-kg-900-900_b2435e4415df406083884511b1991333_small.jpg",
+      "name": "Cherry Jumbo New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Jumbo"],
+      "price": "799,000₫",
+      "volume": "Nhỏ ~ 01kg",
+      "description": "Cherry Jumbo New Zealand to lớn và ngọt ngào, rất ngon miệng."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-jumbo-new-zealand-khay-0.6-kg-900-900_b2435e4415df406083884511b1991333_small.jpg",
+      "name": "Cherry Jumbo New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Jumbo"],
+      "price": "1,598,000₫",
+      "volume": "Trung ~ 02kg",
+      "description": "Cherry Jumbo New Zealand to lớn và ngọt ngào, rất ngon miệng."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-jumbo-new-zealand-khay-0.6-kg-900-900_b2435e4415df406083884511b1991333_small.jpg",
+      "name": "Cherry Jumbo New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Jumbo"],
+      "price": "2,397,000₫",
+      "volume": "Lớn ~ 03kg",
+      "description": "Cherry Jumbo New Zealand to lớn và ngọt ngào, rất ngon miệng."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-jumbo-new-zealand-khay-0.6-kg-900-900_b2435e4415df406083884511b1991333_small.jpg",
+      "name": "Cherry Jumbo New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Jumbo"],
+      "price": "3,995,000₫",
+      "volume": "Thùng nguyên đai ~ 05kg",
+      "description": "Cherry Jumbo New Zealand to lớn và ngọt ngào, rất ngon miệng."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-do-new-zealand-khay-0.6-kg-900-900_68735b142e0843dd8dd15f5d4f819009_small.jpg",
+      "name": "Cherry Đỏ New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Red"],
+      "price": "419,000₫",
+      "volume": "Mini ~ 0.6kg",
+      "description": "Cherry Đỏ New Zealand có vị ngọt, màu sắc bắt mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-do-new-zealand-khay-0.6-kg-900-900_68735b142e0843dd8dd15f5d4f819009_small.jpg",
+      "name": "Cherry Đỏ New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Red"],
+      "price": "699,000₫",
+      "volume": "Nhỏ ~ 01kg",
+      "description": "Cherry Đỏ New Zealand có vị ngọt, màu sắc bắt mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-do-new-zealand-khay-0.6-kg-900-900_68735b142e0843dd8dd15f5d4f819009_small.jpg",
+      "name": "Cherry Đỏ New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Red"],
+      "price": "1,049,000₫",
+      "volume": "Trung ~ 1.5kg",
+      "description": "Cherry Đỏ New Zealand có vị ngọt, màu sắc bắt mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-do-new-zealand-khay-0.6-kg-900-900_68735b142e0843dd8dd15f5d4f819009_small.jpg",
+      "name": "Cherry Đỏ New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Red"],
+      "price": "1,398,000₫",
+      "volume": "Trung ~ 02kg",
+      "description": "Cherry Đỏ New Zealand có vị ngọt, màu sắc bắt mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-do-new-zealand-khay-0.6-kg-900-900_68735b142e0843dd8dd15f5d4f819009_small.jpg",
+      "name": "Cherry Đỏ New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Red"],
+      "price": "2,097,000₫",
+      "volume": "Lớn ~ 03kg",
+      "description": "Cherry Đỏ New Zealand có vị ngọt, màu sắc bắt mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/cherry-do-new-zealand-khay-0.6-kg-900-900_68735b142e0843dd8dd15f5d4f819009_small.jpg",
+      "name": "Cherry Đỏ New Zealand",
+      "isInStock": true,
+      "tags": ["New Zealand", "Cherry", "Brand Red"],
+      "price": "3,495,000₫",
+      "volume": "Thùng nguyên đai ~ 05kg",
+      "description": "Cherry Đỏ New Zealand có vị ngọt, màu sắc bắt mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/nho-golden-shine-muscat-han-quoc-hop-01-chum_5cedf3a838a24819bb1ef879860b1835_small.jpg",
+      "name": "Nho Hàn Golden Shine Muscat",
+      "isInStock": true,
+      "tags": ["South Korea", "Grapes", "Brand Shine"],
+      "price": "1,299,000₫",
+      "volume": "Hộp 01 chùm",
+      "description": "Nho Hàn Golden Shine Muscat quả to và ngọt, cân bằng hương vị."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/nho-golden-shine-muscat-han-quoc-hop-01-chum_5cedf3a838a24819bb1ef879860b1835_small.jpg",
+      "name": "Nho Hàn Golden Shine Muscat",
+      "isInStock": true,
+      "tags": ["South Korea", "Grapes", "Brand Shine"],
+      "price": "2,598,000₫",
+      "volume": "Thùng nguyên đai 02 chùm",
+      "description": "Nho Hàn Golden Shine Muscat quả to và ngọt, cân bằng hương vị."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/dau-tay-vip-han-quoc-hop-420-gram_-_copy_626c472e7c234163b35435a7b09988c6_small.jpg",
+      "name": "Dâu Tây Hàn Quốc VIP",
+      "isInStock": true,
+      "tags": ["South Korea", "Strawberry", "Brand VIP"],
+      "price": "999,000₫",
+      "volume": "Hộp đơn ~ 0.42kg",
+      "description": "Dâu Tây Hàn Quốc VIP tươi ngon, ngọt ngào, rất bắt mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/dau-tay-vip-han-quoc-hop-420-gram_-_copy_626c472e7c234163b35435a7b09988c6_small.jpg",
+      "name": "Dâu Tây Hàn Quốc VIP",
+      "isInStock": true,
+      "tags": ["South Korea", "Strawberry", "Brand VIP"],
+      "price": "1,899,000₫",
+      "volume": "Hộp đôi ~ 0.84kg",
+      "description": "Dâu Tây Hàn Quốc VIP tươi ngon, ngọt ngào, rất bắt mắt."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/z3765206655524_812a21867b6670beb7390828b178dfa7_39098db682a549dbb69c509d9a4d8145_small.jpg",
+      "name": "Nho Shine Muscat Hàn Quốc",
+      "isInStock": true,
+      "tags": ["South Korea", "Grapes", "Brand Shine"],
+      "price": "499,000₫",
+      "volume": "01 chùm",
+      "description": "Nho Shine Muscat Hàn Quốc ngọt ngào và thơm mát, rất được ưa chuộng."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/z3765206655524_812a21867b6670beb7390828b178dfa7_39098db682a549dbb69c509d9a4d8145_small.jpg",
+      "name": "Nho Shine Muscat Hàn Quốc",
+      "isInStock": true,
+      "tags": ["South Korea", "Grapes", "Brand Shine"],
+      "price": "1,587,000₫",
+      "volume": "03 chùm + Hộp kính",
+      "description": "Nho Shine Muscat Hàn Quốc ngọt ngào và thơm mát, rất được ưa chuộng."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/z3765206655524_812a21867b6670beb7390828b178dfa7_39098db682a549dbb69c509d9a4d8145_small.jpg",
+      "name": "Nho Shine Muscat Hàn Quốc",
+      "isInStock": true,
+      "tags": ["South Korea", "Grapes", "Brand Shine"],
+      "price": "2,086,000₫",
+      "volume": "04 chùm + Hộp kính",
+      "description": "Nho Shine Muscat Hàn Quốc ngọt ngào và thơm mát, rất được ưa chuộng."
+    },
+    {
+      "image": "//product.hstatic.net/200000528965/product/dau-tay-han-quoc-hop-330-gram_45e0f55d842c4904baa9571571b9ea08_small.jpg",
+      "name": "Dâu Tây Hàn Quốc",
+      "isInStock": true,
+      "tags": ["South Korea", "Strawberry", "Brand Standard"],
+      "price": "599,000₫",
+      "volume": "Hộp dâu ~ 330gram",
+      "description": "Dâu Tây Hàn Quốc có màu đỏ và vị ngọt đặc trưng, rất được yêu thích."
+    }
+    ]
+}

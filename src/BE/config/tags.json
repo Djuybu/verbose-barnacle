@@ -1,0 +1,134 @@
+{
+    "data": [
+        {
+            "name": "South Africa",
+            "description": "Fruit from South Africa",
+            "type": "origin"
+        },
+        {
+            "name": "Fruit",
+            "description": "A type of edible plant product.",
+            "type": "fruit_type"
+        },
+        {
+            "name": "BrandB",
+            "description": "A brand associated with fruit products.",
+            "type": "brand"
+        },
+        {
+            "name": "Grape",
+            "description": "A type of fruit often used for eating or making wine.",
+            "type": "fruit_type"
+        },
+        {
+            "name": "Luxury",
+            "description": "A high-end brand or type of product.",
+            "type": "brand"
+        },
+        {
+            "name": "New Zealand",
+            "description": "Country known for producing a variety of fruits.",
+            "type": "origin"
+        },
+        {
+            "name": "Cherry",
+            "description": "A small, round stone fruit that is typically red or black.",
+            "type": "fruit_type"
+        },
+        {
+            "name": "Brand Red",
+            "description": "A brand that typically emphasizes boldness and flavor.",
+            "type": "brand"
+        },
+        {
+            "name": "Brand Jumbo",
+            "description": "A brand known for oversized fruit products.",
+            "type": "brand"
+        },
+        {
+            "name": "Japan",
+            "description": "Country famous for various fruits including apples.",
+            "type": "origin"
+        },
+        {
+            "name": "BrandA",
+            "description": "A top-tier brand in the fruit market.",
+            "type": "brand"
+        },
+        {
+            "name": "Apple",
+            "description": "A widely cultivated fruit known for its sweetness and variety.",
+            "type": "fruit_type"
+        },
+        {
+            "name": "Fruit from Japan",
+            "description": "Fresh fruits cultivated from Japanese orchards.",
+            "type": "origin"
+        },
+        {
+            "name": "Australia",
+            "description": "A country recognized for its diverse agricultural products.",
+            "type": "origin"
+        },
+        {
+            "name": "Plum",
+            "description": "A juicy fruit with a smooth skin and pit inside.",
+            "type": "fruit_type"
+        },
+        {
+            "name": "Brand Ruby",
+            "description": "A brand often associated with rich flavors.",
+            "type": "brand"
+        },
+        {
+            "name": "USA",
+            "description": "Country that produces a wide variety of fruits.",
+            "type": "origin"
+        },
+        {
+            "name": "Fruit from USA",
+            "description": "Fruits grown in the United States known for quality.",
+            "type": "origin"
+        },
+        {
+            "name": "South Korea",
+            "description": "Country famous for its fruits, including grapes.",
+            "type": "origin"
+        },
+        {
+            "name": "Grapes",
+            "description": "A berry used for fresh eating and winemaking.",
+            "type": "fruit_type"
+        },
+        {
+            "name": "Brand Shine",
+            "description": "A brand that emphasizes quality and freshness.",
+            "type": "brand"
+        },
+        {
+            "name": "Brand Sugar",
+            "description": "A brand known for sweetness.",
+            "type": "brand"
+        },
+        {
+            "name": "Strawberry",
+            "description": "A sweet, red fruit with tiny seeds on its surface.",
+            "type": "fruit_type"
+        },
+        {
+            "name": "Brand VIP",
+            "description": "A premium brand for exclusive fruit varieties.",
+            "type": "brand"
+        },
+        {
+            "name": "Brand Super Big",
+            "description": "A brand focusing on oversized fruit products.",
+            "type": "brand"
+        },
+        {
+            "name": "Brand Standard",
+            "description": "A brand known for consistent quality.",
+            "type": "brand"
+        }
+    ]
+}
