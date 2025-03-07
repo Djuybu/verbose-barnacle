@@ -27,7 +27,24 @@ const TagService = {
             }
             response.push(newTag)
         })
-        console.log(response);
+        return response;
+    },
+
+    getTagWithFilter: async (limit: number, type: string) => {
+        const response: any[] = []
+        const data = await tagCollection.where("type", "==", type).limit(limit).get()
+        data.forEach((tag) => {
+            const id = tag.id;
+            const data = tag.data();
+            const newTag: Tag = {
+                id: id,
+                name: data.name,
+                description: data.description,
+                type: data.type
+            }
+            response.push(newTag)
+        })
+        console.log("get tag with filter");
         return response;
     }
 }

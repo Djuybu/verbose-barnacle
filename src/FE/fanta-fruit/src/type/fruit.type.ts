@@ -4,5 +4,6 @@ export interface Fruit {
     description: string,
     tags: string[],
     price: string,
-    volume: string
+    volume: string,
+    image: string
 }

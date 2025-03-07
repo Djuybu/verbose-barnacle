@@ -4,6 +4,7 @@ import fruitRouter from "./routes/fruit.route";
 import orderRouter from "./routes/order.route";
 import tagRouter from "./routes/tag.route";
 import fruitCarsouelRouter from "./routes/fruit-carsouel.route";
+import tagTypeRouter from "./routes/tag-type.route";
 const app = express()
 
 const PORT = 3000
@@ -14,6 +15,7 @@ app.use('/fruits', fruitRouter)
 app.use('/order', orderRouter)
 app.use('/tag', tagRouter)
 app.use('/carsouel', fruitCarsouelRouter)
+app.use('/tagtype', tagTypeRouter)
 
 app.listen(PORT, () => {
     console.log("Hello world!");

@@ -12,5 +12,6 @@ const db = admin.firestore();
 export const fruitCollection = db.collection('fruit')
 export const tagsCollection = db.collection('tags')
 export const orderCollection = db.collection('order')
+export const tagTypeCollection = db.collection('type')
 export default db
 

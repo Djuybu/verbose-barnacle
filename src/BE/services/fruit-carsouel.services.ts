@@ -12,9 +12,8 @@ const fruitCarsouelService = {
             carsouels.push({ tag, fruitList });
         }
 
-        console.log(carsouels);
         return carsouels;
-    } 
+    },
 }
 
 export default fruitCarsouelService

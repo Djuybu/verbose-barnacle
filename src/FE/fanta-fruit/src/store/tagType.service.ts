@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { FruitCarsouel } from '../type/fruitCarsouel.type'
+import TagType from '../type/tagtype.type'
 
-export const fruitCarsouelApi = createApi({
-    reducerPath: 'fruitcCarsouelApi', // Tên field trong Redux state
+export const tagTypeApi = createApi({
+    reducerPath: 'tagTypeApi', // Tên field trong Redux state
     tagTypes: ['Posts'], // Những kiểu tag cho phép dùng trong blogApi
     keepUnusedDataFor: 10, // Giữ data trong 10s sẽ xóa (mặc định 60s)
     baseQuery: fetchBaseQuery({
@@ -14,16 +14,11 @@ export const fruitCarsouelApi = createApi({
     }),
     endpoints: (build) => ({
       // Generic type theo thứ tự là kiểu response trả về và argument
-      getCarsouels: build.query<FruitCarsouel[], {limit: number}>({
-
-        query: ({limit}) => {
-            const params = new URLSearchParams();
-            if (limit) params.append('limit', limit.toString());
-
-            return `carsouel?${params.toString()}`
-      },
-        })
+      getTagTypeList: build.query<TagType[], void>({
+        query: () => "/tagtype"
+      })
+      
     })
 })
 
-export const {useGetCarsouelsQuery} = fruitCarsouelApi
+export const {useGetTagTypeListQuery} = tagTypeApi
