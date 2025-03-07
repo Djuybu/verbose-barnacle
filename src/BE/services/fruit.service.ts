@@ -1,6 +1,6 @@
 import { response } from "express";
 import db from "../config/db";
-import {FruitCollectionDTO} from "../models/fruit.model"
+import {FruitCollectionDTO, Fruit} from "../models/fruit.model"
 
 const fruitCollection = db.collection('fruit')
 const FruitService = {
@@ -56,8 +56,30 @@ const FruitService = {
         }
         console.log(response);
         return response;
-    }
+    },
+    getFruitDetails:  async () => {
+        const snapshot = await fruitCollection.get();
+        const fruitList = snapshot.docs.map((fruitDoc) => {
+            const data = fruitDoc.data();
+            
+            return {
+                id: fruitDoc.id,
+                name: data?.name ?? "",
+                description: data?.description ?? "",
+                isInStock: data?.isInStock ?? false,
+                price: data?.price ?? 0,
+                volume: data?.volume ?? 0,
+                tags: data?.tags ?? [],
+                image: data?.image ?? ""
+            } as Fruit;
+        });
     
+        return fruitList.map(fruit => 
+            `ID: ${fruit.id}, Name: ${fruit.name}, Description: ${fruit.description}, ` +
+            `In Stock: ${fruit.isInStock}, Price: ${fruit.price}, Volume: ${fruit.volume}, ` +
+            `Tags: [${fruit.tags.join(', ')}], Image: ${fruit.image}`
+        ).join(' | ');
+    }
 }
 
 export default FruitService

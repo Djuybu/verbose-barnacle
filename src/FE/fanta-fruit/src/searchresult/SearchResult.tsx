@@ -1,5 +1,4 @@
 import { useLocation } from "react-router-dom";
-import { FruitCarsouel, FruitDTO } from "../type/fruitCarsouel.type";
 import { useGetFruitFromSearchQueryQuery } from "../store/fruitApi.store";
 import Carsouel from "../props/Carsouel/Carsouel";
 

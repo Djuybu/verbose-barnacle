@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import {Fruit} from "../../type/fruit.type";
 import { FruitDTO } from "../../type/fruitCarsouel.type";
 
 const FruitListDisplay: React.FC<FruitDTO> = (fruit: FruitDTO) => {

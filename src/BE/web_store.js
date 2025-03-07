@@ -173,7 +173,7 @@ async function otherFunction(userInput) {
 }
 
 
-//HANDLE QUESTION
+//HANDLE  
 async function classifiedQuestions(userInput) {
   // Exit case
   if (userInput.toLowerCase() === "exit") {

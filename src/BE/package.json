@@ -5,7 +5,8 @@
     "express": "^4.21.2",
     "firebase": "^11.3.1",
     "firebase-admin": "^13.1.0",
-    "openai": "^4.85.4"
+    "openai": "^4.85.4",
+    "short-unique-id": "^5.2.0"
   },
   "scripts": {
     "start": "npx tsx index.js"
