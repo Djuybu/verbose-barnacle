@@ -6,7 +6,7 @@ const assistantRouter = Router()
 assistantRouter.get('/', async(req, res) => {
     res.send(await assistantService.createAssistant());
 })
-.get('/chat', async(req, res) => {
+.post('/chat', async(req, res) => {
     try {
         const id = req.body.id;
         const request = req.body.request;
