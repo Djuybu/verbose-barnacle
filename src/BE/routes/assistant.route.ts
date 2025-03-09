@@ -9,10 +9,10 @@ assistantRouter.get('/', async(req, res) => {
 .post('/chat', async(req, res) => {
     try {
         const id = req.body.id;
-        const request = req.body.request;
-    res.send(await assistantService.getAsssistance(id, request))
+        const request = req.body.content;
+        res.send(await assistantService.getAsssistance(id, request))
     } catch (error) {
-        res.status(500).send(`error: ${error.message}`)
+        res.status(500).send(`error: ${error}`)
     }
 })
 

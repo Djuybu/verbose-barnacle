@@ -10,7 +10,7 @@ const assistantService = {
     createAssistant: async() => {
         const id = randomUUID();
         assistants.push(new Assistant(id))
-        return id;
+        return {id: id};
     },
     getAsssistance: async(id: string, userRequest: string) => {
         const result = await assistants.filter((assistant) => assistant.getId() === id)[0].Chat(userRequest, fruitList)

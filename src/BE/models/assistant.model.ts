@@ -24,7 +24,8 @@ export class Assistant {
             response_format: { type: "json_object" },
             messages: [
             { role: 'system', content: `You are a helpful assistant with memory ${this.chatHistory} that help do what the user tell you to do, like 
-              putting item to the cart, answer in json, but cureently the action is in development, so tell the customer that` },
+              putting item to the cart, answer in json, but cureently the action is in development, so tell the customer that` + 
+            "Please return a JSON with the following structure:{reason, data}" },
             { role: 'user', content: userInput}
             ]
           });
@@ -50,7 +51,7 @@ export class Assistant {
             response_format: { type: "json_object" },
             messages: [
             { role: 'system', content: `You are a helpful assistant with memory ${this.chatHistory} that provides support to the user about our store 
-            product based on IDs and names: ${fruitDetails}, answer in valid json without notation and always gives reason why` },
+            product based on IDs and names: ${fruitDetails}, answer in valid json without notation and always gives reason why` + "Please follow the sructure of this json:{content:string,data:string}"},
             { role: 'user', content: userInput}
             ]
         });
