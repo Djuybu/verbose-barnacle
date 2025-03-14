@@ -24,6 +24,18 @@ const openai = new OpenAI({
 // Store chat history
 const chatHistory = [];  
 
+// Store last 10 exchanges
+function saveChat(role, content) {
+    // Push to chatHistory
+    chatHistory.push({ role, content });
+
+    // Keep only last 10 exchanges
+    if (chatHistory.length > 10) {
+        chatHistory.shift();  // Remove the oldest message
+    }
+}
+
+
 // FUNCTIONS:
 // First, the user's question will be passed to classification(barbaric type, i know)
 // Then, it will be passed to corresponding function to execute; include: support
@@ -36,84 +48,66 @@ const chatHistory = [];
 
 // Prompt-shortening and saving
 async function savePrompt(userInput) {
-
   const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
-    messages: [
-    { role: 'system', content: `You are a helpful assistant and your job is to shorten user prompt to store memory and reduced the number of used token. So take the input and shorten it as much as possible and out put it as string` },
-    { role: 'user', content: userInput.toString()}
-    ]
+      model: 'gpt-4o-mini',
+      messages: [
+          { role: 'system', content: "Shorten user prompt while keeping the key details." },
+          { role: 'user', content: userInput }
+      ]
   });
 
-  // Save chat log
-  if (response.choices && response.choices.length > 0 && response.choices[0].message) {
-    chatHistory.push({ role: 'user', content: response.choices[0].message.content });
-  } else {
-    console.error("Unexpected API response:", response);
+  if (response.choices?.[0]?.message?.content) {
+      saveChat('user', response.choices[0].message.content);
   }
-
-  return;
 }
 
 // Answer-shortening and saving
 async function saveAnswer(answer) {
-
   const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
-    messages: [
-    { role: 'system', content: `You are a helpful assistant and your job is to shorten your answer to user question, to reduced the number of used token for cached input. So take the input and shorten it as much as possible and output it as string` },
-    { role: 'assistant', content: answer.toString()}
-    ]
+      model: 'gpt-4o-mini',
+      messages: [
+          { role: 'system', content: "Shorten the assistant's response while keeping key information." },
+          { role: 'assistant', content: answer }
+      ]
   });
 
-  // Save chat log
-  if (response.choices && response.choices.length > 0 && response.choices[0].message) {
-    chatHistory.push({ role: 'assistant', content: response.choices[0].message.content });
-  } else {
-    console.error("Unexpected API response:", response);
+  if (response.choices?.[0]?.message?.content) {
+      saveChat('assistant', response.choices[0].message.content);
   }
-
-
-  return;
 }
-
 
 //SUPPORT FUNCTION
 // Fetch fruit IDs and names from Firebase
 async function getFruitsFromFirebase() {
   const snapshot = await db.collection('fruit').get();
   return snapshot.docs.map(doc => ({
-      fruit_id: doc.id,  // Document ID is the fruit_id
-      name: doc.data().name // Assume each document has a 'name' field
+      fruit_id: doc.id,
+      name: doc.data().name
   }));
 }
 
 // Get recommendations from OpenAI
 async function getSupport(userInput) {
-  // Prepare the data for the prompt (fruit_id and name)
   const fruits = await getFruitsFromFirebase();
   const fruitDetails = fruits.map(fruit => `${fruit.fruit_id} (${fruit.name})`).join(', ');
 
   const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
-    response_format: { type: "json_object" },
-    messages: [
-    { role: 'system', content: `You are a helpful assistant with memory ${chatHistory} that provides support to the user about our store 
-      product based on IDs and names: ${fruitDetails}, answer in json and always gives reason why` },
-    { role: 'user', content: userInput}
-    ]
+      model: 'gpt-4o-mini',
+      messages: [
+          { role: 'system', content: `You are a helpful assistant. Use past memory: ${JSON.stringify(chatHistory)}. 
+              Provide support about these products: ${fruitDetails}. Answer in JSON.` },
+          { role: 'user', content: userInput }
+      ]
   });
 
-  // Save chat log and output
-  if (response.choices && response.choices.length > 0 && response.choices[0].message) {
-    savePrompt(userInput);
-    saveAnswer(response.choices[0].message.content); 
-    console.log(response.choices[0].message.content);
-  } else {
-    console.error("Unexpected API response:", response);
+  // Save responses
+  if (response.choices?.[0]?.message?.content) {
+      savePrompt(userInput);
+      saveAnswer(response.choices[0].message.content);
+      console.log(response.choices[0].message.content);
   }
-  
 }
+
 
 
 //ACTION FUNCTION
@@ -123,20 +117,19 @@ async function getAction(userInput) {
     model: 'gpt-4o-mini',
     response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a helpful assistant with memory ${chatHistory} that help do what the user tell you to do, like 
-      putting item to the cart, answer in json, but cureently the action is in development, so tell the customer that` },
+    { role: 'system', content: `You are a helpful assistant. Use past memory: ${JSON.stringify(chatHistory)}, 
+      that help do what the user tell you to do, like putting item to the cart, answer in json, but cureently 
+      the action is in development, so tell the customer that` },
     { role: 'user', content: userInput}
     ]
   });
 
-  // Save chat log
-  if (response.choices && response.choices.length > 0 && response.choices[0].message) {
+  // Save responses
+  if (response.choices?.[0]?.message?.content) {
     savePrompt(userInput);
     saveAnswer(response.choices[0].message.content);
     console.log(response.choices[0].message.content);
-  } else {
-    console.error("Unexpected API response:", response);
-  }
+}
   
 }
 
@@ -147,13 +140,14 @@ async function getMeme(userInput) {
     model: 'gpt-4o-mini',
     response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a funny assistant that tell customer joke or meme. For example, if the customer ask what 10+9 is, 
-      tell them it is 21, answer in json` },
+    { role: 'system', content: `You are a funny assistant that tell customer joke or meme. For example, if 
+      the customer ask what 10+9 is, tell them it is 21, answer in json` },
     { role: 'user', content: userInput}
     ]
   });
 
   console.log(response.choices[0].message.content);
+  // No saving for this
 }
 
 
@@ -163,13 +157,14 @@ async function otherFunction(userInput) {
     model: 'gpt-4o-mini',
     response_format: { type: "json_object" },
     messages: [
-    { role: 'system', content: `You are a serious assistant and the customer just asked a question that is not in your range, so dont answer, 
-      answer in json` },
+    { role: 'system', content: `You are a serious assistant and the customer just asked a question that is 
+      not in your range, so dont answerthe user question, answer in json` },
     { role: 'user', content: userInput}
     ]
   });
 
   console.log(response.choices[0].message.content);
+  // And this
 }
 
 
@@ -187,8 +182,8 @@ async function classifiedQuestions(userInput) {
     const response = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
-        { role: 'system', content: `You are a bot assistant used to classify questions from the user. Return only ONE of the following words: 
-          support/action/meme/other. For example:
+        { role: 'system', content: `You are a bot assistant used to classify questions from the user. 
+          Return only ONE of the following words: support/action/meme/other. For example:
           - If the user asks about information or recommendations, return "support".
           - If they need you to put an item in the cart, return "action".
           - If they want a joke/meme, return "meme".
@@ -200,7 +195,7 @@ async function classifiedQuestions(userInput) {
 
     const category = response.choices[0].message.content.trim().toLowerCase();
     
-    // Route the input to the correct function
+    // Route the input to function
     if (category === 'support') await getSupport(userInput);
     else if (category === 'action') await getAction(userInput);
     else if (category === 'meme') await getMeme(userInput);
@@ -210,7 +205,6 @@ async function classifiedQuestions(userInput) {
     console.error("Error processing request:", error);
   }
 
-  // Ask for the next input
   promptUser();
 }
 
@@ -230,7 +224,3 @@ function promptUser() {
 console.log("Chatbot started! Type 'exit' to stop.");
 
 promptUser();
-
-// classifiedQuestions('skibidi rizz sigma ohio');
-
-// create a function to trim and shorten both ai output and user input to lower memory
